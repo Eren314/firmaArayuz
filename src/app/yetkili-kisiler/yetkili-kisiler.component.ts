@@ -1,0 +1,142 @@
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Message, MessageService} from 'primeng/api';
+import {GlobalService} from '../global.service';
+
+
+@Component({
+  selector: 'app-yetkili-kisiler',
+  templateUrl: './yetkili-kisiler.component.html',
+  styleUrls: ['./yetkili-kisiler.component.css'],
+  providers: [MessageService]
+})
+export class YetkiliKisilerComponent implements OnInit {
+
+  disabled: boolean = true;
+  displayDialog: boolean;
+  fy: any;
+  yeniYetkili: boolean;
+  yetkili: any = {};
+  selectedYetkili: any;
+  yetkililer: any;
+  areusure: boolean = false;
+  kturu: any;
+  kontakTuru: any;
+
+
+  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+
+    this.http
+      .get(
+        'http://localhost/rest/firma/parametre-getir?queryName=param_kontak_turu_query'
+      )
+      .subscribe(
+        resp => {
+          console.log(resp);
+          this.kturu = resp;
+        }
+      );
+  }
+
+  ngOnInit() {
+
+    this.fetchFY();
+  }
+
+
+  private fetchFY() {
+
+
+    this.http
+      .get(
+        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilileri'
+      )
+
+      .subscribe(fys => {
+        //console.log(posts);
+        this.yetkililer = fys;
+        console.log(this.yetkililer);
+
+
+      });
+  }
+
+  toggleDisabled() {
+    this.disabled = !this.disabled;
+  }
+
+  onRowSelect(event) {
+    this.yeniYetkili = false;
+    this.yetkili = this.cloneYetkili(event.data);
+    this.displayDialog = true;
+  }
+
+  cloneYetkili(c: any): any {
+    let yetkili = {};
+    for (let prop in c) {
+      yetkili[prop] = c[prop];
+    }
+    return yetkili;
+  }
+
+  saveThis() {
+    let yetkililer = [...this.yetkililer];
+
+    this.http
+      .post(
+        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilisi', this.yetkili
+      )
+      .subscribe(response => {
+        console.log(response);
+
+      });
+    if (this.yeniYetkili)
+      yetkililer.push(this.yetkili);
+    else
+      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
+
+    this.yetkililer = yetkililer;
+    this.yetkili = null;
+    this.displayDialog = false;
+
+    /*window.location.reload();*/
+
+
+    this.messageService.add({severity: 'success', summary: 'Yetkili bilgileri kaydedildi', detail: ''});
+  }
+
+  deleteThis() {
+    let index = this.yetkililer.indexOf(this.selectedYetkili);
+
+
+    this.http
+      .delete(
+        'http://localhost/rest/firma/firma-yetkilisi/' + this.yetkili.id
+      )
+      .subscribe(response => {
+        console.log(response);
+
+      });
+
+    this.yetkililer = this.yetkililer.filter((val, i) => i !== index);
+    this.yetkili = null;
+    this.displayDialog = false;
+    this.areusure = false;
+
+    this.messageService.add({severity: 'error', summary: 'Yetkili silindi', detail: ''});
+  }
+
+  showDialogToAdd() {
+    this.yeniYetkili = true;
+    this.yetkili = {};
+    this.displayDialog = true;
+  }
+
+  areusureopen() {
+    this.areusure = true;
+  }
+
+  areusureclose() {
+    this.areusure = false;
+  }
+}

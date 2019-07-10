@@ -1,0 +1,99 @@
+<br>
+<p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
+         [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20"
+         [rowsPerPageOptions]="[10,20,50]">
+  <ng-template pTemplate="caption">
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ürün-Hizmet Ekle"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th [pSortableColumn]="'adi'" pResizableColumn>Adı
+        <p-sortIcon [field]="'adi'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'urunHizmetTipi.ad'" pResizableColumn>Tipi
+        <p-sortIcon [field]="'urunHizmetTipi.ad'"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-yetkili let-rowData>
+    <tr [pSelectableRow]="rowData">
+      <td>{{yetkili.adi}}</td>
+      <td *ngIf="yetkili.urunHizmetTipi">{{yetkili.urunHizmetTipi.ad}}</td>
+      <td *ngIf="!yetkili.urunHizmetTipi"></td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+<p-dialog header="Ürün Hizmet Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+          [modal]="true" [style]="{width: '700px'}">
+  <div *ngIf="yetkili">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="adi">Adı*</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="adi" #myTextBox="ngModel" required id="myTextBox" name="myTextBox"
+                 [(ngModel)]="yetkili.adi"/>
+          <div *ngIf="!myTextBox.value" style="color:red;">
+            <i class="pi pi-exclamation-triangle"></i> Adı girilmesi gereklidir
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label>Tipi</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="uhturu" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
+                      [(ngModel)]="yetkili.urunHizmetTipi" optionLabel="ad"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="nitelikleri">Nitelikleri*</label>
+        </div>
+        <div class="ui-g-8">
+          <textarea pInputTextarea id="nitelikleri" #myTextBox2="ngModel" required id="myTextBox2" name="myTextBox2"
+                    rows="10" value="{{yetkili.niteligi}}" [(ngModel)]="yetkili.niteligi"></textarea>
+          <div *ngIf="!myTextBox2.value" style="color:red;">
+            <i class="pi pi-exclamation-triangle"></i> Nitelikleri girilmesi gereklidir
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="adi">Notlar</label>
+        </div>
+        <div class="ui-g-8">
+          <textarea pInputTextarea rows="5" [(ngModel)]="yetkili.notlar"></textarea>
+        </div>
+      </div>
+
+
+    </div>
+
+    <button type="button" pButton icon="pi pi-times" (click)="areusureopen()" label="Sil"></button>
+    <!--<button type="button" pButton icon="pi pi-save"  (click)="saveThis()" label="Kaydet"></button>-->
+    <div style="float: right;">
+      <button type="button" [disabled]="!myTextBox.value || !myTextBox2.value" class="btn btn-primary" pButton
+              icon="pi pi-save" (click)="saveThis()" label="Kaydet"></button>
+    </div>
+
+  </div>
+
+</p-dialog>
+
+<p-toast position="top-left"></p-toast>
+
+<p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
+  <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
+  <div style="float: right;">
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
+  </div>
+
+</p-dialog>
+

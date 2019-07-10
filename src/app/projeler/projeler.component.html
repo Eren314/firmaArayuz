@@ -1,0 +1,116 @@
+<br>
+
+<p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
+         [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20"
+         [rowsPerPageOptions]="[10,20,50]">
+  <ng-template pTemplate="caption">
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Proje Ekle"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th [pSortableColumn]="'firmaReferans.adi'" pResizableColumn>Adı
+        <p-sortIcon [field]="'firmaReferans.adi'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'firmaReferans.kurum.ad'" pResizableColumn>Referans
+        <p-sortIcon [field]="'firmaReferans.kurum.ad'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'firmaReferans.tarihi'" pResizableColumn>Tarih
+        <p-sortIcon [field]="'firmaReferans.tarihi'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'firmaReferans.suresi'" pResizableColumn>Süresi(Ay)
+        <p-sortIcon [field]="'firmaReferans.suresi'"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-yetkili let-rowData>
+    <tr [pSelectableRow]="rowData">
+      <td>{{yetkili.firmaReferans.adi}}</td>
+      <td>{{yetkili.firmaReferans.kurum.ad}}</td>
+      <!--<td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi.slice(8,10)}}.{{yetkili.firmaReferans.tarihi.slice(5,7)}}.{{yetkili.firmaReferans.tarihi.slice(0,4)}} </td>-->
+      <td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi}}</td>
+      <td *ngIf="!yetkili.firmaReferans.tarihi"></td>
+      <td>{{yetkili.firmaReferans.suresi}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+<p-dialog header="Proje Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+          [style]="{width: '700px'}">
+  <div *ngIf="firmaReferans; yetkili">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="firmaReferans.adi">Adı*</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="firmaReferans.adi" #myTextBox="ngModel" required id="myTextBox" name="myTextBox"
+                 [(ngModel)]="firmaReferans.adi"/>
+          <div *ngIf="!myTextBox.value" style="color:red;">
+            <i class="pi pi-exclamation-triangle"></i> Adı girilmesi gereklidir
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label>Referans</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="kurumlar" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
+                      [(ngModel)]="firmaReferans.kurum" optionLabel="ad"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="trh">Tarih</label>
+        </div>
+        <div class="ui-g-8">
+          <!--<input pInputText id="sure" [(ngModel)]="firmaReferans.suresi">-->
+          <p-calendar id="trh" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="sure">Süresi(Ay)</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="sure" [(ngModel)]="firmaReferans.suresi">
+        </div>
+      </div>
+      <!--<div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="sure">Konusu</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="sure" [(ngModel)]="yetkili.konusu">
+        </div>
+      </div>-->
+
+    </div>
+
+    <!--&lt;!&ndash;<button type="button" pButton icon="pi pi-save"  (click)="saveThis()" label="Kaydet"></button>&ndash;&gt;-->
+    <div style="float: right;">
+      <button *ngIf="!yeniYetkili" type="button" pButton icon="pi pi-times" (click)="areusureopen()"
+              label="Sil"></button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" pButton [disabled]="!myTextBox.value" icon="pi pi-save" (click)="saveThis()"
+              label="Kaydet"></button>
+    </div>
+  </div>
+
+</p-dialog>
+
+
+<p-toast position="top-left"></p-toast>
+
+<p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
+  <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
+  <div style="float: right;">
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
+  </div>
+
+</p-dialog>
+
+

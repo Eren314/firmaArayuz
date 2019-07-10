@@ -1,0 +1,111 @@
+<br>
+<p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
+         [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20"
+         [rowsPerPageOptions]="[10,20,50]">
+  <ng-template pTemplate="caption">
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Doküman Ekle"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <!--<th [pSortableColumn]="'aktif'" pResizableColumn>Aktif/Pasif<p-sortIcon [field]="'aktif'"></p-sortIcon></th>
+      &lt;!&ndash;<th [pSortableColumn]="'kullaniciBirim.kisaAd'" pResizableColumn>Veri Sahibi<p-sortIcon [field]="'kullaniciBirim.kisaAd'"></p-sortIcon></th>&ndash;&gt;
+      &lt;!&ndash;<th [pSortableColumn]="'kontakTuru'" pResizableColumn>Kontak Türü<p-sortIcon [field]="'kontakTuru'"></p-sortIcon></th>&ndash;&gt;
+      <th [pSortableColumn]="'ad'" pResizableColumn>Ad Soyad<p-sortIcon [field]="'ad'"></p-sortIcon></th>
+      <th [pSortableColumn]="'unvan'" pResizableColumn>Ünvan<p-sortIcon [field]="'unvan'"></p-sortIcon></th>
+      <th [pSortableColumn]="'telefon'" pResizableColumn>Telefon<p-sortIcon [field]="'telefon'"></p-sortIcon></th>
+      <th [pSortableColumn]="'cepTelefonu'" pResizableColumn>Cep Telefonu<p-sortIcon [field]="'cepTelefonu'"></p-sortIcon></th>
+      <th [pSortableColumn]="'eposta'" pResizableColumn>E-posta<p-sortIcon [field]="'eposta'"></p-sortIcon></th>-->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-yetkili let-rowData>
+    <tr [pSelectableRow]="rowData">
+      <!--<td *ngIf="yetkili.aktif" align="center"><i class="pi pi-circle-on" style="color: green; text-shadow: 0px 0px 5px"></i></td>
+      <td *ngIf="!yetkili.aktif" align="center"><i class="pi pi-circle-on" style="color: red; text-shadow: 0px 0px 5px"></i></td>
+      &lt;!&ndash;<td>{{yetkili.kullaniciBirim.kisaAd}}</td>&ndash;&gt;
+      &lt;!&ndash;<td *ngIf="yetkili.kontakTuru">{{yetkili.kontakTuru.ad}}</td>
+      <td *ngIf="!yetkili.kontakTuru"></td>&ndash;&gt;
+      <td>{{yetkili.ad}} {{yetkili.soyad}}</td>
+      <td>{{yetkili.unvan}}</td>
+      <td>{{yetkili.telefon}}</td>
+      <td>{{yetkili.cepTelefonu}}</td>
+      <td>{{yetkili.eposta}}</td>-->
+    </tr>
+  </ng-template>
+</p-table>
+
+
+<p-dialog header="Yetkili Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+          [style]="{width: '700px'}">
+  <div class="ui-g ui-fluid" *ngIf="yetkili">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="ad">Ad</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="ad" [(ngModel)]="yetkili.ad"/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="ad">Soyad</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="soyad" [(ngModel)]="yetkili.soyad"/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="unvan">Ünvan</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="unvan" [(ngModel)]="yetkili.unvan"/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label>Telefon</label>
+      </div>
+      <div class="ui-g-8">
+        <p-inputMask [(ngModel)]="yetkili.telefon" mask="(9999)999-9999"></p-inputMask>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label>Cep Telefonu</label>
+      </div>
+      <div class="ui-g-8">
+        <p-inputMask [(ngModel)]="yetkili.cepTelefonu" mask="(9999)999-9999"></p-inputMask>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="eposta">E-posta</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="eposta" [(ngModel)]="yetkili.eposta"/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="adres">Adres</label>
+      </div>
+      <div class="ui-g-8">
+        <!--<input pInputText [(ngModel)]="yetkili.adres" />-->
+        <textarea pInputTextarea id="adres" rows="5" value="{{yetkili.adress}}" [(ngModel)]="yetkili.adres"></textarea>
+      </div>
+    </div>
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-times" (click)="deleteThis()" label="Sil"></button>
+      <button type="button" pButton icon="pi pi-save" (click)="saveThis()" label="Kaydet"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-toast position="top-left"></p-toast>
+

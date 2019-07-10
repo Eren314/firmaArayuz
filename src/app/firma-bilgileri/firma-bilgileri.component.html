@@ -1,0 +1,120 @@
+<!--
+
+<button type="button" class="btn btn-primary" pButton (click)="fetchPosts()" label="Bilgileri Çek"></button>
+&nbsp;&nbsp;&nbsp;
+<button type="button" class="btn btn-primary"  (click)="toggleDisabled()" pButton label="Düzenle"></button>
+-->
+
+
+<br>
+<p-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="p-grid">
+          <div class="p-col-12 p-md-12 p-xl-6">
+            <p style="color: #757575"> Firma adı *</p>
+            <input type="text" pInputText #myTextBox="ngModel" required id="myTextBox" name="myTextBox"
+                   [disabled]="disabled" [(ngModel)]="this.loadedPosts.adi" style="width: 500px;">
+            <div *ngIf="!myTextBox.value" style="color:red;">
+              <i class="pi pi-exclamation-triangle"></i> Firma adı girilmesi gereklidir
+            </div>
+            <div *ngIf="myTextBox.value">
+              <br>
+            </div>
+            <p style="color: #757575"> Faks</p>
+            <p-inputMask [(ngModel)]="fax" [disabled]="disabled" placeholder="{{fax}}"
+                         [(ngModel)]="this.loadedPosts.fax" mask="(9999)999-9999" size="65"></p-inputMask>
+            <br><br>
+            <p style="color: #757575"> Web Adresi</p>
+            <input type="text" pInputText [disabled]="disabled" value="{{this.loadedPosts.webAdresi}}"
+                   [(ngModel)]="this.loadedPosts.webAdresi" style="width: 500px;"><br><br>
+            <p style="color: #757575"> Personel Sayısı</p>
+            <input type="text" pInputText [disabled]="disabled" [(ngModel)]="this.loadedPosts.personelSayisi"
+                   pKeyFilter="pnum" style="width: 500px;"><br><br>
+            <p style="color: #757575"> Adres *</p>
+            <textarea pInputTextarea #myTextBox3="ngModel" required id="myTextBox3" name="myTextBox3"
+                      [disabled]="disabled" rows="5" value="{{this.loadedPosts.adres}}"
+                      [(ngModel)]="this.loadedPosts.adres" style="width: 500px;"></textarea>
+            <div *ngIf="!myTextBox3.value" style="color:red;">
+              <i class="pi pi-exclamation-triangle"></i> Adres girilmesi gereklidir
+            </div>
+            <div *ngIf="myTextBox3.value">
+              <br>
+            </div>
+            <p style="color: #757575"> Sertifika ve Belgeler</p>
+            <p-multiSelect [options]="firmaN" defaultLabel="Seçiniz" [style]="{'width': '500px'}"
+                           maxSelectedLabels="100" appendTo="body" [(ngModel)]="this.loadedPosts.firmaNitelikleri"
+                           [disabled]="disabled" optionLabel="ad"></p-multiSelect>
+            <br><br>
+            <p style="color: #757575"> Kullanılan Teknolojiler</p>
+            <textarea pInputTextarea [disabled]="disabled" rows="5"
+                      [(ngModel)]="this.loadedPosts.kullanilanTeknolojiler" style="width: 500px;"></textarea><br><br>
+            <p style="color: #757575"> Personel Nitelikleri</p>
+            <textarea pInputTextarea [disabled]="disabled" rows="5" [(ngModel)]="this.loadedPosts.personelNitelikleri"
+                      style="width: 500px;"></textarea><br><br>
+          </div>
+          <div class="p-col-12 p-md-12 p-lg-6">
+            <p style="color: #757575"> Telefon *</p>
+            <p-inputMask [(ngModel)]="telefon" #myTextBox2="ngModel" required id="myTextBox2" name="myTextBox2"
+                         [disabled]="disabled" placeholder="{{this.loadedPosts.telefon}}"
+                         [(ngModel)]="this.loadedPosts.telefon" mask="(9999)999-9999" size="65"></p-inputMask>
+            <div *ngIf="!myTextBox2.value" style="color:red;">
+              <i class="pi pi-exclamation-triangle"></i> Telefon girilmesi gereklidir
+            </div>
+            <div *ngIf="myTextBox2.value">
+              <br>
+            </div>
+            <p style="color: #757575"> Kuruluş Yılı</p>
+            <p-inputMask [(ngModel)]="kurulusYili" [disabled]="disabled" placeholder="{{this.loadedPosts.kurulusYili}}"
+                         [(ngModel)]="this.loadedPosts.kurulusYili" mask="9999" size="65"></p-inputMask>
+            <br><br>
+            <p style="color: #757575"> E-posta</p>
+            <input type="text" pInputText [disabled]="disabled" [(ngModel)]="this.loadedPosts.eposta"
+                   style="width: 500px;"><br><br>
+            <p style="color: #757575"> Vergi Dairesi</p>
+            <input type="text" pInputText [disabled]="disabled" [(ngModel)]="this.loadedPosts.vergiDairesi"
+                   style="width: 500px;"><br><br>
+            <p style="color: #757575"> Vergi Numarası</p>
+            <p-inputMask [(ngModel)]="vergiNumarasi" [disabled]="disabled"
+                         placeholder="{{this.loadedPosts.vergiNumarasi}}" [(ngModel)]="this.loadedPosts.vergiNumarasi"
+                         mask="9999999999" size="65"></p-inputMask>
+            <br><br>
+            <p style="color: #757575"> Firma Büyüklüğü</p>
+            <p-dropdown [options]="buyukluk" showClear="true" [autoWidth]="false" [style]="{'width':'500px'}"
+                        placeholder="Seçiniz" [(ngModel)]="this.loadedPosts.firmaBuyuklugu" [disabled]="disabled"
+                        optionLabel="ad"></p-dropdown>
+            <br><br>
+            <!--<p style="color: #757575"> Güvenlik Soruşturması Durumu</p>
+            <p-dropdown [options]="sor" [autoWidth]="false" [style]="{'width':'500px'}" placeholder="Seçiniz"  [(ngModel)]="this.loadedPosts.guvenlikSorusturmasiDurumu" [disabled]="disabled" optionLabel="ad" ></p-dropdown><br><br>-->
+            <p style="color: #757575"> Çalışma Alanı</p>
+            <p-multiSelect [options]="calal" defaultLabel="Seçiniz" [style]="{'width': '500px'}" maxSelectedLabels="100"
+                           appendTo="body" [(ngModel)]="this.loadedPosts.firmaCalismaAlanlari" [disabled]="disabled"
+                           optionLabel="ad"></p-multiSelect>
+            <br><br>
+            <p style="color: #757575"> Kullanılan Teknolojiler</p>
+            <p-multiSelect [options]="firmaKT" defaultLabel="Seçiniz" [style]="{'width': '500px'}"
+                           maxSelectedLabels="100" appendTo="body"
+                           [(ngModel)]="this.loadedPosts.firmaKullanilanTeknolojiler" [disabled]="disabled"
+                           optionLabel="ad"></p-multiSelect>
+            <br><br>
+            <p style="color: #757575"> Notlar</p>
+            <textarea pInputTextarea [disabled]="disabled" rows="5" [(ngModel)]="this.loadedPosts.notlar"
+                      style="width: 500px;"></textarea><br><br>
+            <!--<p style="color: #757575"> Değerlendirme</p>
+            <textarea pInputTextarea [disabled]="disabled" rows="5" value="{{this.loadedPosts.firmaDegerlendirme}}" [(ngModel)]="this.loadedPosts.firmaDegerlendirme" style="width: 500px;"></textarea><br><br>-->
+          </div>
+        </div>
+
+
+        <button type="button" [disabled]="!myTextBox.value || !myTextBox2.value || !myTextBox3.value" pButton
+                icon="pi pi-save" (click)="saveThis()" label="Kaydet"></button>
+        <!--<button type="button"  pButton  (click)="mail()" label="Mail"></button>-->
+        <p-toast position="top-left"></p-toast>
+      </div>
+    </div>
+  </div>
+</p-card>
+<br><br><br>
+
+

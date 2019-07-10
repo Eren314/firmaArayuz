@@ -1,0 +1,36 @@
+<br>
+<p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
+         [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20"
+         [rowsPerPageOptions]="[10,20,50]">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th [pSortableColumn]="'ad'" pResizableColumn>Proje
+        <p-sortIcon [field]="'ad'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'urunAdi'" pResizableColumn>Ürün/Hizmet Tipi
+        <p-sortIcon [field]="'urunAdi'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'baslangicTarihi'" pResizableColumn>Başlama Tarihi
+        <p-sortIcon [field]="'baslangicTarihi'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'bitisTarihi'" pResizableColumn>Bitiş Tarihi
+        <p-sortIcon [field]="'bitisTarihi'"></p-sortIcon>
+      </th>
+      <!--<th [pSortableColumn]="'urunHizmetTipi.ad'" pResizableColumn>Tipi<p-sortIcon [field]="'urunHizmetTipi.ad'"></p-sortIcon></th>-->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-yetkili let-rowData>
+    <tr [pSelectableRow]="rowData">
+      <td>{{yetkili.ad}}</td>
+      <td>{{yetkili.urunAdi}}</td>
+      <td *ngIf="yetkili.baslangicTarihi">
+        {{yetkili.baslangicTarihi.slice(8,10)}}.{{yetkili.baslangicTarihi.slice(5,7)}}.{{yetkili.baslangicTarihi.slice(0,4)}}
+      </td>
+      <td>{{yetkili.bitisTarihi}}</td>
+
+    </tr>
+  </ng-template>
+</p-table>
+
+
