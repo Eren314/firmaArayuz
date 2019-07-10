@@ -7,16 +7,18 @@ import {ProjelerComponent} from './projeler/projeler.component';
 import {TurksatProjelerComponent} from './turksat-projeler/turksat-projeler.component';
 import {ReferanslarComponent} from './referanslar/referanslar.component';
 import {DokumanlarComponent} from './dokumanlar/dokumanlar.component';
+import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/firma-bilgileri', pathMatch: 'full'},
+  {path: '', redirectTo: '/giris', pathMatch: 'full'},
   {path: 'firma-bilgileri', component: FirmaBilgileriComponent},
   {path: 'yetkili-kisiler', component: YetkiliKisilerComponent},
   {path: 'urun-hizmetler', component: UrunHizmetlerComponent},
   {path: 'projeler', component: ProjelerComponent},
   {path: 'turksat-projeleri', component: TurksatProjelerComponent},
   {path: 'referanslar', component: ReferanslarComponent},
-  {path: 'dokumanlar', component: DokumanlarComponent}
+  {path: 'dokumanlar', component: DokumanlarComponent},
+  {path: 'giris', component: AuthComponent}
 
   ];
 

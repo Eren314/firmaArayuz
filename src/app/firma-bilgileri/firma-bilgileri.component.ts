@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Firma} from '../firma.module';
-import {Message, MessageService} from 'primeng/api';
+import {MenuItem, Message, MessageService} from 'primeng/api';
 import {GlobalService} from '../global.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -45,9 +46,9 @@ export class FirmaBilgileriComponent implements OnInit {
   firmaKT: any;
   firmaN: any;
   firmaNitelikleri: any[];
+  navs: MenuItem[];
 
-
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService, private router: Router) {
 
     this.http
       .get(
@@ -112,6 +113,17 @@ export class FirmaBilgileriComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.navs = [
+      {label: 'Firma Bilgileri',  routerLink: ['firma-bilgileri']},
+      {label: 'Yetkili Kişiler', routerLink: ['yetkili-kisiler']},
+      {label: 'Ürün ve Hizmetler', routerLink: ['urun-hizmetler']},
+      {label: 'Projeler', routerLink: ['projeler']},
+      {label: 'Türksat Projeleri', routerLink: ['turksat-projeleri']},
+      //{label: 'Referanslar', routerLink: ['referanslar']},
+      {label: 'Dokümanlar', routerLink: ['dokumanlar']}
+
+    ];
     this.fetchPosts();
   }
 

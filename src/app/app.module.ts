@@ -34,6 +34,7 @@ import { DokumanlarComponent } from './dokumanlar/dokumanlar.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {CalendarModule} from 'primeng/calendar';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {CalendarModule} from 'primeng/calendar';
     ReferanslarComponent,
     ProjelerComponent,
     TurksatProjelerComponent,
-    DokumanlarComponent
+    DokumanlarComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

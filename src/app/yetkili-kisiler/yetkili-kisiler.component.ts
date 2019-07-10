@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Message, MessageService} from 'primeng/api';
+import {MenuItem, Message, MessageService} from 'primeng/api';
 import {GlobalService} from '../global.service';
 
 
@@ -22,6 +22,7 @@ export class YetkiliKisilerComponent implements OnInit {
   areusure: boolean = false;
   kturu: any;
   kontakTuru: any;
+  navs: MenuItem[];
 
 
   constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
@@ -39,6 +40,16 @@ export class YetkiliKisilerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navs = [
+      {label: 'Firma Bilgileri',  routerLink: ['firma-bilgileri']},
+      {label: 'Yetkili Kişiler', routerLink: ['yetkili-kisiler']},
+      {label: 'Ürün ve Hizmetler', routerLink: ['urun-hizmetler']},
+      {label: 'Projeler', routerLink: ['projeler']},
+      {label: 'Türksat Projeleri', routerLink: ['turksat-projeleri']},
+      //{label: 'Referanslar', routerLink: ['referanslar']},
+      {label: 'Dokümanlar', routerLink: ['dokumanlar']}
+
+    ];
 
     this.fetchFY();
   }

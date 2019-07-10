@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Firma} from './firma-bilgileri/firma.module';
 import {MenuItem} from 'primeng/api';
 import {GlobalService} from './global.service';
+import {Router} from '@angular/router';
 
 
 
@@ -33,7 +34,7 @@ export class AppComponent implements  OnInit {
   navs: MenuItem[];
 
 
-  constructor(private http: HttpClient, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private gservice: GlobalService, private router: Router) {
   }
 
   ngOnInit() {

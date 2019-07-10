@@ -1,3 +1,4 @@
+
 <br>
 
 <p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
@@ -68,7 +69,7 @@
         </div>
         <div class="ui-g-8">
           <!--<input pInputText id="sure" [(ngModel)]="firmaReferans.suresi">-->
-          <p-calendar id="trh" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
+          <input pInputText id="trh" [(ngModel)]="firmaReferans.tarihi">
         </div>
       </div>
       <div class="ui-g-12">
@@ -79,14 +80,23 @@
           <input pInputText id="sure" [(ngModel)]="firmaReferans.suresi">
         </div>
       </div>
-      <!--<div class="ui-g-12">
+      <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="sure">Konusu</label>
+          <label for="konusu">Konusu</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText id="sure" [(ngModel)]="yetkili.konusu">
+          <input pInputText id="konusu" [(ngModel)]="yetkili.konusu">
         </div>
-      </div>-->
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="nitelikleri">Nitelikleri</label>
+        </div>
+        <div class="ui-g-8">
+          <textarea pInputTextarea id="nitelikleri" rows="5" [(ngModel)]="yetkili.nitelikleri"></textarea>
+        </div>
+      </div>
+
 
     </div>
 

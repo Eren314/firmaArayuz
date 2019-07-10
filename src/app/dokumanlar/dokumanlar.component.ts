@@ -11,29 +11,31 @@ import {GlobalService} from '../global.service';
 })
 export class DokumanlarComponent implements OnInit {
 
+  disabled: boole
   disabled: boolean = true;
   displayDialog: boolean;
-  fy: any;
   yeniYetkili: boolean;
   yetkili: any = {};
   selectedYetkili: any;
   yetkililer: any;
+  urunHizmetTipi: any;
+  areusure: boolean = false;
+  uhturu: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
-  }
+  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {}
 
   ngOnInit() {
-
     this.fetchFY();
   }
+
 
   private fetchFY() {
 
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilileri'
+        'http://localhost/rest/firma/' + this.gservice.id + '/firma-dokumanlari'
       )
 
       .subscribe(fys => {
@@ -64,29 +66,30 @@ export class DokumanlarComponent implements OnInit {
   }
 
   saveThis() {
+
     let yetkililer = [...this.yetkililer];
-    if (this.yeniYetkili)
-      yetkililer.push(this.yetkili);
-    else
-      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilisi', this.yetkili
+        'http://localhost/rest/firma/' + this.gservice.id + '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
 
       });
+    if (this.yeniYetkili)
+      yetkililer.push(this.yetkili);
+    else
+      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
 
     this.yetkililer = yetkililer;
     this.yetkili = null;
     this.displayDialog = false;
 
-    window.location.reload();
+    /*window.location.reload();*/
 
 
-    /*this.messageService.add({severity:'success', summary:'Yetkili bilgileri kaydedildi', detail:''});*/
+    this.messageService.add({severity: 'success', summary: 'Ürün/Hizmet bilgileri kaydedildi', detail: ''});
   }
 
   deleteThis() {
@@ -95,7 +98,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .delete(
-        'http://localhost/rest/firma/firma-yetkilisi/' + this.yetkili.id
+        'http://localhost/rest/firma/urun-hizmet/' + this.yetkili.id
       )
       .subscribe(response => {
         console.log(response);
@@ -105,6 +108,10 @@ export class DokumanlarComponent implements OnInit {
     this.yetkililer = this.yetkililer.filter((val, i) => i !== index);
     this.yetkili = null;
     this.displayDialog = false;
+    this.areusure = false;
+
+    this.messageService.add({severity: 'error', summary: 'Ürün/Hizmet silindi', detail: ''});
+
   }
 
   showDialogToAdd() {
@@ -113,4 +120,11 @@ export class DokumanlarComponent implements OnInit {
     this.displayDialog = true;
   }
 
+  areusureopen() {
+    this.areusure = true;
+  }
+
+  areusureclose() {
+    this.areusure = false;
+  }
 }
