@@ -11,7 +11,6 @@ import {GlobalService} from '../global.service';
 })
 export class DokumanlarComponent implements OnInit {
 
-  disabled: boole
   disabled: boolean = true;
   displayDialog: boolean;
   yeniYetkili: boolean;
