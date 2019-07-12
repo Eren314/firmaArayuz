@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {GlobalService} from '../global.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-projeler',
@@ -13,19 +14,22 @@ export class ProjelerComponent implements OnInit {
 
   disabled: boolean = true;
   displayDialog: boolean;
+  display2: boolean;
   yeniYetkili: boolean;
   yetkili: any = {};
   firmaReferans: any = {};
+  dataList: any = {};
   selectedYetkili: any;
   yetkililer: any;
   areusure: boolean = false;
   kurumlar: any;
   trh: Date;
+  alfa: any;
 
 
   constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
 
-    this.http
+    /*this.http
       .get(
         'http://localhost/rest/firma/parametre-getir?queryName=param_urun_hizmet_tipi_query'
       )
@@ -34,7 +38,8 @@ export class ProjelerComponent implements OnInit {
           console.log(resp);
           this.kurumlar = resp;
         }
-      );
+      );*/
+    this.kurumlar = {};
   }
 
   ngOnInit() {
@@ -81,6 +86,7 @@ export class ProjelerComponent implements OnInit {
   saveThis() {
 
     let yetkililer = [...this.yetkililer];
+    this.yetkili.firmaReferans = this.firmaReferans;
 
     this.http
       .post(
@@ -88,10 +94,10 @@ export class ProjelerComponent implements OnInit {
       )
       .subscribe(response => {
         console.log(response);
+        //console.log(this.yetkili);
 
       });
 
-    this.yetkili.firmaReferans = this.firmaReferans;
 
     if (this.yeniYetkili)
       yetkililer.push(this.yetkili);
@@ -100,13 +106,15 @@ export class ProjelerComponent implements OnInit {
 
     this.yetkililer = yetkililer;
     this.yetkili = {};
-    this.firmaReferans = {};
+    //this.firmaReferans = {};
     this.displayDialog = false;
 
     /*window.location.reload();*/
 
 
     this.messageService.add({severity: 'success', summary: 'Proje bilgileri kaydedildi', detail: ''});
+
+
   }
 
   deleteThis() {
@@ -147,5 +155,24 @@ export class ProjelerComponent implements OnInit {
     this.areusure = false;
   }
 
+  sorgulama() {
 
-}
+    this.http
+      .get(
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=Ankara&firstRecord=0&pageSize=10'
+      )
+      .subscribe(
+        resp => {
+          console.log(resp);
+          this.kurumlar = resp;
+        }
+      );
+
+    this.display2 = true;
+    /*this.kurumlar = [
+      { ad: 'Vin1'},
+      { ad: 'Vin2'},
+      { ad: 'Vin3'}];*/
+  }
+
+  }

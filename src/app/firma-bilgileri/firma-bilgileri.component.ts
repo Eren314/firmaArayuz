@@ -164,7 +164,7 @@ export class FirmaBilgileriComponent implements OnInit {
   }
 
 
-  private saveThis() {
+   saveThis() {
 
 
     this.http

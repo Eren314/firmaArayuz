@@ -4,8 +4,7 @@ import {Firma} from './firma-bilgileri/firma.module';
 import {MenuItem} from 'primeng/api';
 import {GlobalService} from './global.service';
 import {Router} from '@angular/router';
-
-
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +33,7 @@ export class AppComponent implements  OnInit {
   navs: MenuItem[];
 
 
-  constructor(private http: HttpClient, private gservice: GlobalService, private router: Router) {
+  constructor(private http: HttpClient, private gservice: GlobalService, public router: Router) {
   }
 
   ngOnInit() {
@@ -44,7 +43,6 @@ export class AppComponent implements  OnInit {
       {label: 'Ürün ve Hizmetler', routerLink: ['urun-hizmetler']},
       {label: 'Projeler', routerLink: ['projeler']},
       {label: 'Türksat Projeleri', routerLink: ['turksat-projeleri']},
-      //{label: 'Referanslar', routerLink: ['referanslar']},
       {label: 'Dokümanlar', routerLink: ['dokumanlar']}
 
     ];
@@ -92,6 +90,8 @@ export class AppComponent implements  OnInit {
   storedv(){
     return this.gservice.id;
   }
+
+
 
 
 

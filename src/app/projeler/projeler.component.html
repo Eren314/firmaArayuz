@@ -30,7 +30,7 @@
       <td>{{yetkili.firmaReferans.adi}}</td>
       <td>{{yetkili.firmaReferans.kurum.ad}}</td>
       <!--<td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi.slice(8,10)}}.{{yetkili.firmaReferans.tarihi.slice(5,7)}}.{{yetkili.firmaReferans.tarihi.slice(0,4)}} </td>-->
-      <td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi}}</td>
+      <td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi | date:'dd.MM.yyyy'}}</td>
       <td *ngIf="!yetkili.firmaReferans.tarihi"></td>
       <td>{{yetkili.firmaReferans.suresi}}</td>
     </tr>
@@ -40,7 +40,7 @@
 
 <p-dialog header="Proje Detayları" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
           [style]="{width: '700px'}">
-  <div *ngIf="firmaReferans; yetkili">
+  <div *ngIf="yetkili.firmaReferans">
     <div class="ui-g ui-fluid">
       <div class="ui-g-12">
         <div class="ui-g-4">
@@ -56,11 +56,13 @@
       </div>
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label>Referans</label>
+          <label>Referans*</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown [options]="kurumlar" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
+          <p-dropdown [options]="kurumlar.dataList" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
                       [(ngModel)]="firmaReferans.kurum" optionLabel="ad"></p-dropdown>
+          <!--<input pInputText disabled="true" [(ngModel)]="this.alfa"/>-->
+          <button type="button" pButton (click)="sorgulama()" label="Kurum Seç"></button>
         </div>
       </div>
       <div class="ui-g-12">
@@ -68,8 +70,8 @@
           <label for="trh">Tarih</label>
         </div>
         <div class="ui-g-8">
-          <!--<input pInputText id="sure" [(ngModel)]="firmaReferans.suresi">-->
-          <input pInputText id="trh" [(ngModel)]="firmaReferans.tarihi">
+          <!--<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">-->
+          <p-calendar id="trh" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
         </div>
       </div>
       <div class="ui-g-12">
@@ -122,5 +124,61 @@
   </div>
 
 </p-dialog>
+
+
+
+
+
+
+
+
+
+
+<p-dialog header="Kurum" [(visible)]="display2" [responsive]="true" showEffect="fade" [modal]="true"
+          [style]="{width: '1200px'}">
+
+  <p-table [value]="kurumlar.dataList" [responsive]="true" autoLayout="true" selectionMode="single"
+           [(selection)]="selectedYetkili" [paginator]="true" [rows]="10"
+           [rowsPerPageOptions]="[10,20,50]">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'dataList.ad'" pResizableColumn>Kurum Adı
+          <p-sortIcon [field]="'dataList.ad'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'dataList.hiyerarsi'" pResizableColumn>Kurum Hiyerarşisi
+          <p-sortIcon [field]="'dataList.hiyerarsi'"></p-sortIcon>
+        </th>
+
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-kurum let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td>{{kurum.ad}}</td>
+        <td>{{kurum.hiyerarsi}}</td>
+
+
+      </tr>
+    </ng-template>
+  </p-table>
+
+</p-dialog>
+
+
+<p-toast position="top-left"></p-toast>
+
+<p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
+  <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
+  <div style="float: right;">
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
+  </div>
+
+</p-dialog>
+
+
+<!--<button type="button" pButton (click)="sorgulama()" label="Sorgula"></button>-->
+
+
 
 

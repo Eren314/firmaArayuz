@@ -40,9 +40,9 @@ export class ReferanslarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fetchFY();
+    // this.fetchFY();
   }
-
+/*
   private fetchFY() {
 
 
@@ -101,7 +101,7 @@ export class ReferanslarComponent implements OnInit {
     window.location.reload();
 
 
-    /*this.messageService.add({severity:'success', summary:'Yetkili bilgileri kaydedildi', detail:''});*/
+    /!*this.messageService.add({severity:'success', summary:'Yetkili bilgileri kaydedildi', detail:''});*!/
   }
 
   deleteThis() {
@@ -128,5 +128,5 @@ export class ReferanslarComponent implements OnInit {
     this.displayDialog = true;
   }
 
-
+*/
 }

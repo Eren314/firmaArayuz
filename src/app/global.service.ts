@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  id:number = 6;
+  id: number = 6;
+  version: string = '1.0.0';
 
   constructor() { }
 }
