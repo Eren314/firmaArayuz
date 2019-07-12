@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {GlobalService} from '../global.service';
-import {DatePipe} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
 
 @Component({
@@ -24,31 +23,22 @@ export class ProjelerComponent implements OnInit {
   yetkililer: any;
   areusure: boolean = false;
   kurumlar: any;
-  trh: Date;
   alfa: any;
   ktut: any;
   kurum: any;
+  sorgulanacak: string;
+  loading: boolean;
 
 
   constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
-
-    /*this.http
-      .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_urun_hizmet_tipi_query'
-      )
-      .subscribe(
-        resp => {
-          console.log(resp);
-          this.kurumlar = resp;
-        }
-      );*/
-
     this.kurumlar = {};
+    this.sorgulanacak = '';
+
   }
 
   ngOnInit() {
-
     this.fetchFY();
+    this.loading = true;
   }
 
 
@@ -77,6 +67,7 @@ export class ProjelerComponent implements OnInit {
     this.yetkili = this.cloneYetkili(event.data);
     this.displayDialog = true;
     this.firmaReferans = this.cloneYetkili(event.data.firmaReferans);
+    this.firmaReferans.tarihi = new Date(this.firmaReferans.tarihi);
   }
 
   cloneYetkili(c: any): any {
@@ -173,7 +164,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=&firstRecord=0&pageSize=10'
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=1000'
       )
       .subscribe(
         resp => {
@@ -184,6 +175,23 @@ export class ProjelerComponent implements OnInit {
 
     this.display2 = true;
   }
+  /*sorgulama2() {
+
+    this.http
+      .get(
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=0&pageSize=1000'
+      )
+      .subscribe(
+        resp => {
+          console.log(resp);
+          this.kurumlar = resp;
+        }
+      );
+
+    this.display2 = true;
+  }*/
+
+
   ksec(){
     this.display2 = false;
     this.firmaReferans.kurum = this.ktut;
@@ -191,6 +199,24 @@ export class ProjelerComponent implements OnInit {
   showDialogMaximized(event, dialog: Dialog) {
     dialog.maximized = false;
     dialog.toggleMaximize(event);
+  }
+  loadCarsLazy(event: LazyLoadEvent) {
+    this.loading = true;
+
+    /*in a real application, make a remote request to load data using state metadata from event
+    event.first = First row offset
+    event.rows = Number of rows per page
+    event.sortField = Field name to sort with
+    event.sortOrder = Sort order as number, 1 for asc and -1 for dec
+    filters: FilterMetadata object having field as key and filter value, filter matchMode as value
+
+    imitate db connection over a network*/
+    /*setTimeout(() => {
+      if (this.datasource) {
+        this.cars = this.datasource.slice(event.first, (event.first + event.rows));
+        this.loading = false;
+      }
+    }, 1000);*/
   }
 
 

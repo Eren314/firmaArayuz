@@ -65,15 +65,15 @@
           <button type="button" pButton (click)="sorgulama()" label="Kurum Seç"></button>
         </div>
       </div>
-      <!--<div class="ui-g-12">
+      <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="trh">Tarih</label>
         </div>
         <div class="ui-g-8">
-          &lt;!&ndash;<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">&ndash;&gt;
-          <p-calendar id="trh" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
+          <!--<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">-->
+          <p-calendar id="trh" dateFormat="dd.mm.yy" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
         </div>
-      </div>-->
+      </div>
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="sure">Süresi(Ay)</label>
@@ -129,9 +129,16 @@
 <p-dialog header="Kurum" (onShow)="showDialogMaximized($event,dialDetail)" #dialDetail maximizable="true"
           [(visible)]="display2" [responsive]="true" showEffect="fade" [modal]="true">
 
-  <p-table [value]="kurumlar.dataList" [responsive]="true" autoLayout="true" selectionMode="single"
-           [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect2($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [value]="kurumlar.dataList" [responsive]="true" autoLayout="true" selectionMode="single"
+           [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect2($event)" [paginator]="true" [rows]="10"
+  >
 
+    <ng-template pTemplate="caption">
+      <div style="text-align: left">
+        <button type="button" pButton icon="pi pi-search" (click)="sorgulama()"></button>
+        <input type="text" pInputText size="50" [(ngModel)]="this.sorgulanacak" placeholder="">
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th [pSortableColumn]="'ad'" pResizableColumn>Kurum Adı
@@ -148,11 +155,15 @@
         <td>{{kurum.hiyerarsi}}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="footer">
-      <button type="button" pButton (click)="ksec()" label="Seç"></button>
-    </ng-template>
+    <!--<ng-template pTemplate="footer">
+    </ng-template>-->
 
   </p-table>
+  <br>
+  <div align="center">
+  <button type="button" pButton (click)="ksec()" label="Seç"></button>
+  </div>
+  <br>
 
 </p-dialog>
 
