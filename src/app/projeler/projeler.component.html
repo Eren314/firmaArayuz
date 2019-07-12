@@ -1,4 +1,3 @@
-
 <br>
 
 <p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
@@ -59,21 +58,22 @@
           <label>Referans*</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown [options]="kurumlar.dataList" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
-                      [(ngModel)]="firmaReferans.kurum" optionLabel="ad"></p-dropdown>
-          <!--<input pInputText disabled="true" [(ngModel)]="this.alfa"/>-->
+          <!--<p-dropdown [options]="kurumlar.dataList" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
+                      [(ngModel)]="firmaReferans.kurum" optionLabel="ad"></p-dropdown>-->
+          <input pInputText disabled="true" [(ngModel)]="firmaReferans.kurum.ad"/>
+
           <button type="button" pButton (click)="sorgulama()" label="Kurum Seç"></button>
         </div>
       </div>
-      <div class="ui-g-12">
+      <!--<div class="ui-g-12">
         <div class="ui-g-4">
           <label for="trh">Tarih</label>
         </div>
         <div class="ui-g-8">
-          <!--<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">-->
+          &lt;!&ndash;<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">&ndash;&gt;
           <p-calendar id="trh" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
         </div>
-      </div>
+      </div>-->
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="sure">Süresi(Ay)</label>
@@ -126,41 +126,32 @@
 </p-dialog>
 
 
-
-
-
-
-
-
-
-
-<p-dialog header="Kurum" [(visible)]="display2" [responsive]="true" showEffect="fade" [modal]="true"
-          [style]="{width: '1200px'}">
+<p-dialog header="Kurum" (onShow)="showDialogMaximized($event,dialDetail)" #dialDetail maximizable="true"
+          [(visible)]="display2" [responsive]="true" showEffect="fade" [modal]="true">
 
   <p-table [value]="kurumlar.dataList" [responsive]="true" autoLayout="true" selectionMode="single"
-           [(selection)]="selectedYetkili" [paginator]="true" [rows]="10"
-           [rowsPerPageOptions]="[10,20,50]">
+           [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect2($event)" [paginator]="true" [rows]="10">
 
     <ng-template pTemplate="header">
       <tr>
-        <th [pSortableColumn]="'dataList.ad'" pResizableColumn>Kurum Adı
-          <p-sortIcon [field]="'dataList.ad'"></p-sortIcon>
+        <th [pSortableColumn]="'ad'" pResizableColumn>Kurum Adı
+          <p-sortIcon [field]="'ad'"></p-sortIcon>
         </th>
-        <th [pSortableColumn]="'dataList.hiyerarsi'" pResizableColumn>Kurum Hiyerarşisi
-          <p-sortIcon [field]="'dataList.hiyerarsi'"></p-sortIcon>
+        <th [pSortableColumn]="'hiyerarsi'" pResizableColumn>Kurum Hiyerarşisi
+          <p-sortIcon [field]="'hiyerarsi'"></p-sortIcon>
         </th>
-
-
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-kurum let-rowData>
       <tr [pSelectableRow]="rowData">
         <td>{{kurum.ad}}</td>
         <td>{{kurum.hiyerarsi}}</td>
-
-
       </tr>
     </ng-template>
+    <ng-template pTemplate="footer">
+      <button type="button" pButton (click)="ksec()" label="Seç"></button>
+    </ng-template>
+
   </p-table>
 
 </p-dialog>

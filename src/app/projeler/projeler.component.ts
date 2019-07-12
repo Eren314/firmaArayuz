@@ -3,6 +3,7 @@ import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {GlobalService} from '../global.service';
 import {DatePipe} from '@angular/common';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-projeler',
@@ -25,6 +26,8 @@ export class ProjelerComponent implements OnInit {
   kurumlar: any;
   trh: Date;
   alfa: any;
+  ktut: any;
+  kurum: any;
 
 
   constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
@@ -39,6 +42,7 @@ export class ProjelerComponent implements OnInit {
           this.kurumlar = resp;
         }
       );*/
+
     this.kurumlar = {};
   }
 
@@ -87,6 +91,14 @@ export class ProjelerComponent implements OnInit {
 
     let yetkililer = [...this.yetkililer];
     this.yetkili.firmaReferans = this.firmaReferans;
+    this.yetkili.firmaReferans.referansTipi = 'KAMU';
+    this.yetkili.firmaReferans.kurum = this.firmaReferans.kurum;
+
+
+    if (this.yeniYetkili)
+      yetkililer.push(this.yetkili);
+    else
+      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
 
     this.http
       .post(
@@ -99,10 +111,6 @@ export class ProjelerComponent implements OnInit {
       });
 
 
-    if (this.yeniYetkili)
-      yetkililer.push(this.yetkili);
-    else
-      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
 
     this.yetkililer = yetkililer;
     this.yetkili = {};
@@ -144,8 +152,14 @@ export class ProjelerComponent implements OnInit {
     this.yetkili = {};
     this.yetkili.firmaReferans = {};
     this.firmaReferans = {};
+    this.firmaReferans.kurum = {};
     this.displayDialog = true;
   }
+  onRowSelect2(event) {
+    this.yeniYetkili = false;
+    this.ktut = this.cloneYetkili(event.data);
+  }
+
 
   areusureopen() {
     this.areusure = true;
@@ -159,7 +173,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=Ankara&firstRecord=0&pageSize=10'
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=&firstRecord=0&pageSize=10'
       )
       .subscribe(
         resp => {
@@ -169,10 +183,15 @@ export class ProjelerComponent implements OnInit {
       );
 
     this.display2 = true;
-    /*this.kurumlar = [
-      { ad: 'Vin1'},
-      { ad: 'Vin2'},
-      { ad: 'Vin3'}];*/
+  }
+  ksec(){
+    this.display2 = false;
+    this.firmaReferans.kurum = this.ktut;
+  }
+  showDialogMaximized(event, dialog: Dialog) {
+    dialog.maximized = false;
+    dialog.toggleMaximize(event);
   }
 
-  }
+
+}
