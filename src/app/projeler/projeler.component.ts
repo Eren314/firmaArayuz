@@ -211,8 +211,14 @@ export class ProjelerComponent implements OnInit {
     dialog.maximized = false;
     dialog.toggleMaximize(event);
   }
-  loadCarsLazy(event: LazyLoadEvent) {
+
+  loadLazy(event: LazyLoadEvent) {
     this.loading = true;
+    event.first = 0;
+    event.rows = 10;
+
+    this.kurumlar.dataList = this.kurumlar.dataList.slice(event.first, (event.first + event.rows));
+
 
     /*in a real application, make a remote request to load data using state metadata from event
     event.first = First row offset

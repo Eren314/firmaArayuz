@@ -139,6 +139,7 @@
 
   <p-table #dt [value]="kurumlar.dataList" [responsive]="true" autoLayout="true" selectionMode="single"
            [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect2($event)" [paginator]="true" [rows]="10"
+           [lazy]="true" (onLazyLoad)="loadLazy($event)" [loading]="loading"
   >
 
     <ng-template pTemplate="caption">
