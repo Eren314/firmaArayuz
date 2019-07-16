@@ -29,6 +29,7 @@ export class ProjelerComponent implements OnInit {
   sorgulanacak: string;
   loading: boolean;
   table: any;
+  first: any;
 
 
   constructor(private http: HttpClient, private messageService: MessageService) {
@@ -124,7 +125,6 @@ export class ProjelerComponent implements OnInit {
     }, 300);
 
 
-
   }
 
   deleteThis() {
@@ -157,6 +157,7 @@ export class ProjelerComponent implements OnInit {
     this.firmaReferans.kurum = {};
     this.displayDialog = true;
   }
+
   onRowSelect2(event) {
     this.yeniYetkili = false;
     this.ktut = this.cloneYetkili(event.data);
@@ -186,55 +187,32 @@ export class ProjelerComponent implements OnInit {
 
     this.display2 = true;
   }
-  /*sorgulama2() {
-
-    this.http
-      .get(
-        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=0&pageSize=1000'
-      )
-      .subscribe(
-        resp => {
-          console.log(resp);
-          this.kurumlar = resp;
-        }
-      );
-
-    this.display2 = true;
-  }*/
 
 
-  ksec(){
+  ksec() {
     this.display2 = false;
     this.firmaReferans.kurum = this.ktut;
   }
+
   showDialogMaximized(event, dialog: Dialog) {
     dialog.maximized = false;
     dialog.toggleMaximize(event);
   }
 
-  loadLazy(event: LazyLoadEvent) {
+  /*loadLazy(event: LazyLoadEvent) {
     this.loading = true;
-    event.first = 0;
-    event.rows = 10;
 
-    this.kurumlar.dataList = this.kurumlar.dataList.slice(event.first, (event.first + event.rows));
+    //in a real application, make a remote request to load data using state metadata from event
+    //event.first = First row offset
+    //event.rows = Number of rows per page
+    //event.sortField = Field name to sort with
+    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
+    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
 
-
-    /*in a real application, make a remote request to load data using state metadata from event
-    event.first = First row offset
-    event.rows = Number of rows per page
-    event.sortField = Field name to sort with
-    event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-
-    imitate db connection over a network*/
-    /*setTimeout(() => {
-      if (this.datasource) {
-        this.cars = this.datasource.slice(event.first, (event.first + event.rows));
-        this.loading = false;
-      }
-    }, 1000);*/
-  }
+    //imitate db connection over a network
+    setTimeout(() => {
+    }, 1000);
+  }*/
 
 
 }
