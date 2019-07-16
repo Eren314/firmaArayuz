@@ -52,7 +52,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_firma_buyuklugu_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_firma_buyuklugu_query'
       )
       .subscribe(
         resp => {
@@ -61,7 +61,7 @@ export class FirmaBilgileriComponent implements OnInit {
       );
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_kontak_turu_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_kontak_turu_query'
       )
       .subscribe(
         resp => {
@@ -70,7 +70,7 @@ export class FirmaBilgileriComponent implements OnInit {
       );
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_calisma_alani_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_calisma_alani_query'
       )
       .subscribe(
         resp => {
@@ -79,7 +79,7 @@ export class FirmaBilgileriComponent implements OnInit {
       );
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_firma_kullanilan_teknolojiler_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_firma_kullanilan_teknolojiler_query'
       )
       .subscribe(
         resp => {
@@ -88,7 +88,7 @@ export class FirmaBilgileriComponent implements OnInit {
       );
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_firma_niteligi_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_firma_niteligi_query'
       )
       .subscribe(
         resp => {
@@ -97,7 +97,7 @@ export class FirmaBilgileriComponent implements OnInit {
       );
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_guvenlik_sorusturmasi_durumu_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_guvenlik_sorusturmasi_durumu_query'
       )
       .subscribe(
         resp => {
@@ -132,7 +132,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + environment.id
+        environment.apiUrl + '/rest/firma/' + environment.id
       )
 
       .subscribe(posts => {
@@ -169,7 +169,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma', this.loadedPosts
+        environment.apiUrl + '/rest/firma', this.loadedPosts
       )
       .subscribe(response => {
         console.log(response);
@@ -188,7 +188,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/html-mail?to="erenb.unlu@gmail.com"&subject="Deneme"&message="Test"'
+        environment.apiUrl + '/rest/firma/html-mail?to="erenb.unlu@gmail.com"&subject="Deneme"&message="Test"'
       )
 
       .subscribe(fys => {

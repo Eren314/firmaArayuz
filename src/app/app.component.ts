@@ -64,7 +64,7 @@ export class AppComponent implements  OnInit {
 
       this.http
     .get(
-      'http://localhost/rest/firma/' + environment.id
+         environment.apiUrl + '/rest/firma/' + environment.id
     )
 
     .subscribe(posts => {

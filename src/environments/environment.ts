@@ -7,8 +7,8 @@ export const environment = {
   id: 6,
   version:  '1.0.0',
   zaman: '12.07.2019',
-  mode: 'dev'
-  //apiUrl: 'http://localhost:80'
+  mode: 'dev',
+  apiUrl: 'http://localhost'
 };
 
 /*

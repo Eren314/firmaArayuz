@@ -27,7 +27,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/parametre-getir?queryName=param_urun_hizmet_tipi_query'
+        environment.apiUrl + '/rest/firma/parametre-getir?queryName=param_urun_hizmet_tipi_query'
       )
       .subscribe(
         resp => {
@@ -47,7 +47,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + environment.id + '/firma-urun-hizmetleri'
+        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-urun-hizmetleri'
       )
 
       .subscribe(fys => {
@@ -83,7 +83,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + environment.id + '/urun-hizmet', this.yetkili
+        environment.apiUrl + '/rest/firma/' + environment.id + '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
@@ -110,7 +110,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .delete(
-        'http://localhost/rest/firma/urun-hizmet/' + this.yetkili.id
+        environment.apiUrl + '/rest/firma/urun-hizmet/' + this.yetkili.id
       )
       .subscribe(response => {
         console.log(response);

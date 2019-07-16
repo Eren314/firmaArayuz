@@ -34,7 +34,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + environment.id + '/firma-dokumanlari'
+        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-dokumanlari'
       )
 
       .subscribe(fys => {
@@ -70,7 +70,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + environment.id + '/urun-hizmet', this.yetkili
+        environment.apiUrl + '/rest/firma/' + environment.id + '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
@@ -97,7 +97,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .delete(
-        'http://localhost/rest/firma/urun-hizmet/' + this.yetkili.id
+        environment.apiUrl + '/rest/firma/urun-hizmet/' + this.yetkili.id
       )
       .subscribe(response => {
         console.log(response);

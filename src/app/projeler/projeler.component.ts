@@ -41,6 +41,18 @@ export class ProjelerComponent implements OnInit {
   ngOnInit() {
     this.fetchFY();
     this.loading = true;
+
+    this.http
+      .get(
+        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=0'
+      )
+      .subscribe(
+        resp => {
+          console.log(resp);
+          this.kurumlar = resp;
+        }
+      );
+
   }
 
 
@@ -49,7 +61,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + environment.id + '/firma-projeleri'
+        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-projeleri'
       )
 
       .subscribe(fys => {
@@ -92,7 +104,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + environment.id + '/firma-proje', this.yetkili
+        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-proje', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
@@ -122,7 +134,7 @@ export class ProjelerComponent implements OnInit {
 
     setTimeout(() => {
       this.fetchFY();
-    }, 300);
+    }, 400);
 
 
   }
@@ -133,7 +145,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .delete(
-        'http://localhost/rest/firma/firma-proje/' + this.yetkili.id
+        environment.apiUrl + '/rest/firma/firma-proje/' + this.yetkili.id
       )
       .subscribe(response => {
         console.log(response);
@@ -174,16 +186,16 @@ export class ProjelerComponent implements OnInit {
 
   sorgulama() {
 
-    this.http
+    /*this.http
       .get(
-        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=100'
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=10'
       )
       .subscribe(
         resp => {
           console.log(resp);
           this.kurumlar = resp;
         }
-      );
+      );*/
 
     this.display2 = true;
   }
@@ -199,20 +211,20 @@ export class ProjelerComponent implements OnInit {
     dialog.toggleMaximize(event);
   }
 
-  /*loadLazy(event: LazyLoadEvent) {
-    this.loading = true;
+  loadLazy(event: LazyLoadEvent) {
 
-    //in a real application, make a remote request to load data using state metadata from event
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-
-    //imitate db connection over a network
-    setTimeout(() => {
-    }, 1000);
-  }*/
+    this.loading = false;
+    this.http
+      .get(
+        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=' + +(event.first ? event.first : '0') + '&pageSize=10'
+      )
+      .subscribe(
+        resp => {
+          console.log(resp);
+          this.kurumlar = resp;
+        }
+      );
+  }
 
 
 }
