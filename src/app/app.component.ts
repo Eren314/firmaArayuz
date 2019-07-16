@@ -5,6 +5,7 @@ import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
 import { isDevMode } from '@angular/core';
 import {environment} from '../environments/environment';
+import {GlobalService} from './global.service';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +14,10 @@ import {environment} from '../environments/environment';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements  OnInit {
-  title = 'firmaArayuz';
+
   loadedPosts: any = {};
   adi: string;
-  adres: string;
-  telefon: string;
-  kurulusYili: number;
-  fax: string = '';
-  webAdresi: string;
-  personelSayisi: number;
   disabled: boolean = true;
-  firmaDurumu: boolean;
-  personelNitelikleri: string;
-  notlar: string;
-  firmaDegerlendirme: string;
-  kullanilanTeknolojiler: string;
-  firmaCalismaAlanlari: any[];
-  fy: any;
   navs: MenuItem[];
   version: string;
   zaman: string;
@@ -37,7 +25,7 @@ export class AppComponent implements  OnInit {
 
 
 
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(private http: HttpClient, public router: Router, public gservice: GlobalService) {
     this.version = environment.version;
     this.zaman = environment.zaman;
     this.mode = environment.mode;
@@ -64,7 +52,7 @@ export class AppComponent implements  OnInit {
 
       this.http
     .get(
-         environment.apiUrl + '/rest/firma/' + environment.id
+         environment.apiUrl + '/rest/firma/' + this.gservice.id
     )
 
     .subscribe(posts => {
@@ -82,7 +70,7 @@ export class AppComponent implements  OnInit {
   }
 
   storedv(){
-    return environment.id;
+    return this.gservice.id;
   }
 
 

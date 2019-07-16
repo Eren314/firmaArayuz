@@ -26,7 +26,7 @@ export class YetkiliKisilerComponent implements OnInit {
   navs: MenuItem[];
 
 
-  constructor(private http: HttpClient, private messageService: MessageService) {
+  constructor(private http: HttpClient, private messageService: MessageService, public gservice: GlobalService) {
 
     this.http
       .get(
@@ -61,7 +61,7 @@ export class YetkiliKisilerComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-yetkilileri'
+        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-yetkilileri'
       )
 
       .subscribe(fys => {
@@ -96,7 +96,7 @@ export class YetkiliKisilerComponent implements OnInit {
 
     this.http
       .post(
-        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-yetkilisi', this.yetkili
+        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-yetkilisi', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+  /* You can add global styles to this file, and also import other style files */
 @charset "UTF-8";
 /* open-sans-300 - latin */
 @font-face {
@@ -3332,7 +3332,7 @@ body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link {
 }
 body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-text {
   color: #333333;
-  margin-right: 0.5em;
+  /*margin-right: 0.5em;*/
 }
 body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-icon {
   color: #848484;

@@ -3,6 +3,7 @@ import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {Dialog} from 'primeng/dialog';
 import {environment} from '../../environments/environment';
+import {GlobalService} from '../global.service';
 
 @Component({
   selector: 'app-projeler',
@@ -32,7 +33,7 @@ export class ProjelerComponent implements OnInit {
   first: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService) {
+  constructor(private http: HttpClient, private messageService: MessageService, public gservice: GlobalService) {
     this.kurumlar = {};
     this.sorgulanacak = '';
 
@@ -61,7 +62,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-projeleri'
+        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-projeleri'
       )
 
       .subscribe(fys => {
@@ -104,7 +105,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .post(
-        environment.apiUrl + '/rest/firma/' + environment.id + '/firma-proje', this.yetkili
+        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-proje', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
@@ -207,8 +208,8 @@ export class ProjelerComponent implements OnInit {
   }
 
   showDialogMaximized(event, dialog: Dialog) {
-    dialog.maximized = false;
-    dialog.toggleMaximize(event);
+    dialog.maximized = true;
+    //dialog.toggleMaximize(event);
   }
 
   loadLazy(event: LazyLoadEvent) {
@@ -216,7 +217,7 @@ export class ProjelerComponent implements OnInit {
     this.loading = false;
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=' + +(event.first ? event.first : '0') + '&pageSize=10'
+        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=' +(event.first ? event.first : '0') + '&pageSize=10'
       )
       .subscribe(
         resp => {

@@ -4,6 +4,7 @@ import {Firma} from '../firma.module';
 import {MenuItem, Message, MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {GlobalService} from '../global.service';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class FirmaBilgileriComponent implements OnInit {
   firmaNitelikleri: any[];
   navs: MenuItem[];
 
-  constructor(private http: HttpClient, private messageService: MessageService, private router: Router) {
+  constructor(private http: HttpClient, private messageService: MessageService, private router: Router, public gservice: GlobalService) {
 
     this.http
       .get(
@@ -132,7 +133,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + environment.id
+        environment.apiUrl + '/rest/firma/' + this.gservice.id
       )
 
       .subscribe(posts => {
