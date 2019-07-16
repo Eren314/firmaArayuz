@@ -25,6 +25,9 @@
       <td *ngIf="!yetkili.urunHizmetTipi"></td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="summary">
+    Toplam Kayıt: {{yetkililer?.length}}
+  </ng-template>
 </p-table>
 
 
@@ -93,10 +96,10 @@
 
 <p-toast position="top-left"></p-toast>
 
-<p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
-  <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
+<p-dialog header="Silme işlemini onaylıyor musunuz?"  [(visible)]="areusure">
+  <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="Hayır"></button>
   <div style="float: right;">
-    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Tamam"></button>
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
   </div>
 
 </p-dialog>

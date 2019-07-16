@@ -3332,6 +3332,11 @@ body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link {
 }
 body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-text {
   color: #333333;
+
+
+  font-weight: bold;
+
+
   /*margin-right: 0.5em;*/
 }
 body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-icon {
