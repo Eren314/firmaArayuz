@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
-import {GlobalService} from '../global.service';
 import {Dialog} from 'primeng/dialog';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-projeler',
@@ -28,9 +28,10 @@ export class ProjelerComponent implements OnInit {
   kurum: any;
   sorgulanacak: string;
   loading: boolean;
+  table: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
     this.kurumlar = {};
     this.sorgulanacak = '';
 
@@ -47,7 +48,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-projeleri'
+        'http://localhost/rest/firma/' + environment.id + '/firma-projeleri'
       )
 
       .subscribe(fys => {
@@ -57,6 +58,7 @@ export class ProjelerComponent implements OnInit {
 
       });
   }
+
 
   toggleDisabled() {
     this.disabled = !this.disabled;
@@ -68,6 +70,7 @@ export class ProjelerComponent implements OnInit {
     this.displayDialog = true;
     this.firmaReferans = this.cloneYetkili(event.data.firmaReferans);
     this.firmaReferans.tarihi = new Date(this.firmaReferans.tarihi);
+
   }
 
   cloneYetkili(c: any): any {
@@ -86,14 +89,9 @@ export class ProjelerComponent implements OnInit {
     this.yetkili.firmaReferans.kurum = this.firmaReferans.kurum;
 
 
-    if (this.yeniYetkili)
-      yetkililer.push(this.yetkili);
-    else
-      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
-
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-proje', this.yetkili
+        'http://localhost/rest/firma/' + environment.id + '/firma-proje', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
@@ -101,17 +99,30 @@ export class ProjelerComponent implements OnInit {
 
       });
 
+    if (this.yeniYetkili)
+      yetkililer.push(this.yetkili);
+    else
+      yetkililer[this.yetkililer.indexOf(this.selectedYetkili)] = this.yetkili;
 
 
     this.yetkililer = yetkililer;
+    this.yetkili.firmaReferans = null;
     this.yetkili = {};
     //this.firmaReferans = {};
     this.displayDialog = false;
+
+    this.fetchFY();
+
 
     /*window.location.reload();*/
 
 
     this.messageService.add({severity: 'success', summary: 'Proje bilgileri kaydedildi', detail: ''});
+
+    setTimeout(() => {
+      this.fetchFY();
+    }, 300);
+
 
 
   }
@@ -164,7 +175,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=1000'
+        'http://localhost/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak.toUpperCase() + '&firstRecord=0&pageSize=100'
       )
       .subscribe(
         resp => {

@@ -2,9 +2,9 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Firma} from './firma-bilgileri/firma.module';
 import {MenuItem} from 'primeng/api';
-import {GlobalService} from './global.service';
 import {Router} from '@angular/router';
 import { isDevMode } from '@angular/core';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -31,9 +31,17 @@ export class AppComponent implements  OnInit {
   firmaCalismaAlanlari: any[];
   fy: any;
   navs: MenuItem[];
+  version: string;
+  zaman: string;
+  mode: string;
 
 
-  constructor(private http: HttpClient, private gservice: GlobalService, public router: Router) {
+
+  constructor(private http: HttpClient, public router: Router) {
+    this.version = environment.version;
+    this.zaman = environment.zaman;
+    this.mode = environment.mode;
+
   }
 
   ngOnInit() {
@@ -43,7 +51,7 @@ export class AppComponent implements  OnInit {
       {label: 'Ürün ve Hizmetler', routerLink: ['urun-hizmetler']},
       {label: 'Projeler', routerLink: ['projeler']},
       {label: 'Türksat Projeleri', routerLink: ['turksat-projeleri']},
-      {label: 'Dokümanlar', routerLink: ['dokumanlar']}
+      //{label: 'Dokümanlar', routerLink: ['dokumanlar']}
 
     ];
 
@@ -56,27 +64,13 @@ export class AppComponent implements  OnInit {
 
       this.http
     .get(
-      'http://localhost/rest/firma/' + this.gservice.id
+      'http://localhost/rest/firma/' + environment.id
     )
 
     .subscribe(posts => {
       //console.log(posts);
       this.loadedPosts = posts;
-      console.log(this.loadedPosts);
       this.adi = this.loadedPosts.adi;
-      this.adres = this.loadedPosts.adres;
-      this.telefon = this.loadedPosts.telefon;
-      this.webAdresi = this.loadedPosts.webAdresi;
-      this.fax = this.loadedPosts.fax;
-      this.kurulusYili = this.loadedPosts.kurulusYili;
-      this.personelSayisi = this.loadedPosts.personelSayisi;
-      this.adres = this.loadedPosts.adres;
-      this.firmaDurumu = this.loadedPosts.firmaDurumu;
-      this.personelNitelikleri = this.loadedPosts.personelNitelikleri;
-      this.notlar = this.loadedPosts.notlar;
-      this.firmaDegerlendirme = this.loadedPosts.firmaDegerlendirme;
-      this.kullanilanTeknolojiler = this.loadedPosts.kullanilanTeknolojiler;
-      this.firmaCalismaAlanlari = this.loadedPosts.firmaCalismaAlanlari;
 
     });
     }
@@ -88,7 +82,7 @@ export class AppComponent implements  OnInit {
   }
 
   storedv(){
-    return this.gservice.id;
+    return environment.id;
   }
 
 

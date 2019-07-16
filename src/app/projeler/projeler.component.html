@@ -1,6 +1,6 @@
 <br>
 
-<p-table [value]="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
+<p-table [value]="yetkililer" id="yetkililer" [responsive]="true" autoLayout="true" selectionMode="single"
          [(selection)]="selectedYetkili" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20"
          [rowsPerPageOptions]="[10,20,50]">
   <ng-template pTemplate="caption">
@@ -26,12 +26,20 @@
   </ng-template>
   <ng-template pTemplate="body" let-yetkili let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{yetkili.firmaReferans.adi}}</td>
-      <td>{{yetkili.firmaReferans.kurum.ad}}</td>
-      <!--<td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi.slice(8,10)}}.{{yetkili.firmaReferans.tarihi.slice(5,7)}}.{{yetkili.firmaReferans.tarihi.slice(0,4)}} </td>-->
-      <td *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi | date:'dd.MM.yyyy'}}</td>
-      <td *ngIf="!yetkili.firmaReferans.tarihi"></td>
-      <td>{{yetkili.firmaReferans.suresi}}</td>
+      <td *ngIf="yetkili.firmaReferans">{{yetkili.firmaReferans.adi}}</td>
+      <td *ngIf="!yetkili.firmaReferans"></td>
+
+      <td *ngIf="yetkili.firmaReferans">{{yetkili.firmaReferans.kurum.ad}}</td>
+      <td *ngIf="!yetkili.firmaReferans"></td>
+
+      <td *ngIf="yetkili.firmaReferans">
+        <div *ngIf="yetkili.firmaReferans.tarihi">{{yetkili.firmaReferans.tarihi | date:'dd.MM.yyyy'}}</div>
+        <div *ngIf="!yetkili.firmaReferans.tarihi"></div>
+      </td>
+      <td *ngIf="!yetkili.firmaReferans"></td>
+
+      <td *ngIf="yetkili.firmaReferans">{{yetkili.firmaReferans.suresi}}</td>
+      <td *ngIf="!yetkili.firmaReferans"></td>
     </tr>
   </ng-template>
 </p-table>
@@ -161,7 +169,7 @@
   </p-table>
   <br>
   <div align="center">
-  <button type="button" pButton (click)="ksec()" label="Seç"></button>
+    <button type="button" pButton (click)="ksec()" label="Seç"></button>
   </div>
   <br>
 
@@ -173,14 +181,10 @@
 <p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
   <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
   <div style="float: right;">
-    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Tamam"></button>
   </div>
 
 </p-dialog>
-
-
-<!--<button type="button" pButton (click)="sorgulama()" label="Sorgula"></button>-->
-
 
 
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Message, MessageService} from 'primeng/api';
-import {GlobalService} from '../global.service';
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class TurksatProjelerComponent implements OnInit {
   uhturu: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
 
   }
 
@@ -53,7 +53,7 @@ export class TurksatProjelerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + this.gservice.id + '/alt-yukleniciler'
+        'http://localhost/rest/firma/' + environment.id + '/alt-yukleniciler'
       )
 
       .subscribe(fys => {
@@ -87,7 +87,7 @@ export class TurksatProjelerComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/urun-hizmet', this.yetkili
+        'http://localhost/rest/firma/' + environment.id+ '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

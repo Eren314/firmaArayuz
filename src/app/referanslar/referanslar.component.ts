@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
-import {GlobalService} from '../global.service';
 
 @Component({
   selector: 'app-referanslar',
@@ -35,7 +34,7 @@ export class ReferanslarComponent implements OnInit {
   yetkililer: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
   }
 
   ngOnInit() {

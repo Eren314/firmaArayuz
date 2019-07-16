@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MenuItem, Message, MessageService} from 'primeng/api';
 import {GlobalService} from '../global.service';
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class YetkiliKisilerComponent implements OnInit {
   navs: MenuItem[];
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
 
     this.http
       .get(
@@ -60,7 +61,7 @@ export class YetkiliKisilerComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilileri'
+        'http://localhost/rest/firma/' + environment.id + '/firma-yetkilileri'
       )
 
       .subscribe(fys => {
@@ -95,7 +96,7 @@ export class YetkiliKisilerComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilisi', this.yetkili
+        'http://localhost/rest/firma/' + environment.id + '/firma-yetkilisi', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

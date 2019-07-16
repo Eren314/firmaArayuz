@@ -49,7 +49,7 @@
           <label>Tipi</label>
         </div>
         <div class="ui-g-8">
-          <p-dropdown [options]="uhturu" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
+          <p-dropdown [options]="uhturu" showClear="true" placeholder="Seçiniz"
                       [(ngModel)]="yetkili.urunHizmetTipi" optionLabel="ad"></p-dropdown>
         </div>
       </div>
@@ -96,7 +96,7 @@
 <p-dialog header="Silmek istediğinize emin misiniz?" [(visible)]="areusure">
   <button type="button" pButton icon="pi pi-times" (click)="areusureclose()" label="İptal"></button>
   <div style="float: right;">
-    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Evet"></button>
+    <button type="button" pButton icon="pi pi-check" (click)="deleteThis()" label="Tamam"></button>
   </div>
 
 </p-dialog>

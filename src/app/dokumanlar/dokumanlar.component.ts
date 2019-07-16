@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
-import {GlobalService} from '../global.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-dokumanlar',
@@ -22,7 +22,7 @@ export class DokumanlarComponent implements OnInit {
   uhturu: any;
 
 
-  constructor(private http: HttpClient, private messageService: MessageService, private gservice: GlobalService) {}
+  constructor(private http: HttpClient, private messageService: MessageService) {}
 
   ngOnInit() {
     this.fetchFY();
@@ -34,7 +34,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-dokumanlari'
+        'http://localhost/rest/firma/' + environment.id + '/firma-dokumanlari'
       )
 
       .subscribe(fys => {
@@ -70,7 +70,7 @@ export class DokumanlarComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/urun-hizmet', this.yetkili
+        'http://localhost/rest/firma/' + environment.id + '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);
