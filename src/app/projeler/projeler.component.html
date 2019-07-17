@@ -69,11 +69,13 @@
           <label>Referans*</label>
         </div>
         <div class="ui-g-8">
-          <!--<p-dropdown [options]="kurumlar.dataList" showClear="true" [autoWidth]="false" placeholder="Seçiniz"
-                      [(ngModel)]="firmaReferans.kurum" optionLabel="ad"></p-dropdown>-->
-          <input pInputText disabled="true" [(ngModel)]="firmaReferans.kurum.ad"/>
+          <input pInputText id="firmaReferans.kurum.ad" #myTextBox2="ngModel" required id="myTextBox2" name="myTextBox2" disabled="true" [(ngModel)]="firmaReferans.kurum.ad"/>
 
           <button type="button" pButton (click)="sorgulama()" label="Kurum Seç"></button>
+
+          <div *ngIf="!myTextBox2.value" style="color:red;">
+            <i class="pi pi-exclamation-triangle"></i> Kurum seçilmesi gereklidir
+          </div>
         </div>
       </div>
       <div class="ui-g-12">
@@ -118,7 +120,7 @@
       <button *ngIf="!yeniYetkili" type="button" pButton icon="pi pi-times" (click)="areusureopen()"
               label="Sil"></button>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" pButton [disabled]="!myTextBox.value" icon="pi pi-save" (click)="saveThis()"
+      <button type="button" pButton [disabled]="!myTextBox.value || !myTextBox2.value" icon="pi pi-save" (click)="saveThis()"
               label="Kaydet"></button>
     </div>
   </div>

@@ -8,6 +8,7 @@ import {TurksatProjelerComponent} from './turksat-projeler/turksat-projeler.comp
 import {ReferanslarComponent} from './referanslar/referanslar.component';
 import {DokumanlarComponent} from './dokumanlar/dokumanlar.component';
 import {AuthComponent} from './auth/auth.component';
+import {AktivasyonComponent} from './aktivasyon/aktivasyon.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/giris', pathMatch: 'full'},
@@ -18,7 +19,9 @@ const routes: Routes = [
   {path: 'turksat-projeleri', component: TurksatProjelerComponent},
   {path: 'referanslar', component: ReferanslarComponent},
   {path: 'dokumanlar', component: DokumanlarComponent},
-  {path: 'giris', component: AuthComponent}
+  {path: 'giris', component: AuthComponent},
+  {path: 'aktivasyon', component: AktivasyonComponent},
+  {path: '**', redirectTo: '/giris'}
 
   ];
 

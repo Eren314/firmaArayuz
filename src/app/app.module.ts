@@ -35,6 +35,9 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {CalendarModule} from 'primeng/calendar';
 import { AuthComponent } from './auth/auth.component';
+import { AktivasyonComponent } from './aktivasyon/aktivasyon.component';
+import {PasswordModule} from 'primeng/password';
+import { BaslikComponent } from './baslik/baslik.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { AuthComponent } from './auth/auth.component';
     ProjelerComponent,
     TurksatProjelerComponent,
     DokumanlarComponent,
-    AuthComponent
+    AuthComponent,
+    AktivasyonComponent,
+    BaslikComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,8 @@ import { AuthComponent } from './auth/auth.component';
     MenuModule,
     ConfirmDialogModule,
     ToggleButtonModule,
-    CalendarModule
+    CalendarModule,
+    PasswordModule
   ],
   providers: [],
   bootstrap: [AppComponent]

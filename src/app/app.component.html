@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-xl-12">
       <div align="left">
-        <img src="assets/profit_logo-yatay260x60.png" style="height: 55px">
-        <span style="float:right;"><img src="assets/turksatLogo_topBar.png" style="height: 55px"></span>
+        <img src="assets/logo_light.png" style="height: 50px">
+        <span style="float:right;"><img src="assets/turksatLogo_topBar.png" style="height: 50px"></span>
       </div>
       <br>
       <p-card>
         <br>
-        <div *ngIf="this.router.url !== '/giris'">
-          <h2 align="center" style="color: #E91E63; font-weight: bold">{{this.loadedPosts.adi}} </h2>
+        <div *ngIf="(this.router.url !== '/giris') && (this.router.url !== '/aktivasyon')">
+          <app-baslik></app-baslik>
           <br>
           <p-tabMenu [model]="navs"></p-tabMenu>
         </div>

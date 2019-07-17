@@ -1,19 +1,20 @@
 <div style="margin-left: auto; margin-right: auto; width: 160px" align="center">
   <div style="margin-left: auto; margin-right: auto; width: 160px" align="center">
     <span class="ui-float-label">
-    <input id="kullaniciadi" type="text" pInputText>
+    <input id="kullaniciadi" type="text" pInputText [(ngModel)]="this.eposta">
     <label for="kullaniciadi">Kullanıcı Adı</label>
     </span>
     <br>
     <div>
     <span class="ui-float-label">
-    <input id="sifre" type="password" pInputText>
+    <input id="sifre" type="password" pInputText [(ngModel)]="this.sifre">
     <label for="sifre">Şifre</label>
     </span>
     </div>
     <br>
-    <button type="button" pButton style="font-weight: bold" [routerLink]="['/firma-bilgileri']"
+    <button type="button" pButton style="font-weight: bold" (click)="giris()"
             label="Giriş Yap"></button>
+    <!--[routerLink]="['/firma-bilgileri']-->
   </div>
 </div>
 <br>

@@ -217,7 +217,7 @@ export class ProjelerComponent implements OnInit {
     this.loading = false;
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=' +(event.first ? event.first : '0') + '&pageSize=10'
+        environment.apiUrl + '/rest/firma/kurum_query-lazy-list?sorgu=' + this.sorgulanacak + '&firstRecord=' + (event.first ? event.first : '0') + '&pageSize=10'
       )
       .subscribe(
         resp => {

@@ -33,6 +33,8 @@ export class AppComponent implements  OnInit {
   }
 
   ngOnInit() {
+
+
     this.navs = [
       {label: 'Firma Bilgileri',  routerLink: ['firma-bilgileri']},
       {label: 'Yetkili Kişiler', routerLink: ['yetkili-kisiler']},
