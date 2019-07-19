@@ -1,20 +1,32 @@
-<div style="margin-left: auto; margin-right: auto; width: 160px" align="center">
-  <div style="margin-left: auto; margin-right: auto; width: 160px" align="center">
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-xl-6">
+
     <span class="ui-float-label">
-    <input id="kullaniciadi" type="text" pInputText [(ngModel)]="this.eposta">
+    <input id="kullaniciadi" type="text" pInputText style="width: 400px;" [(ngModel)]="this.eposta">
     <label for="kullaniciadi">Kullanıcı Adı</label>
     </span>
-    <br>
-    <div>
+          <br>
+          <div>
     <span class="ui-float-label">
-    <input id="sifre" type="password" pInputText [(ngModel)]="this.sifre">
+    <input id="sifre" type="password" pInputText style="width: 400px;" [(ngModel)]="this.sifre">
     <label for="sifre">Şifre</label>
     </span>
+          </div>
+          <br><br>
+          <button type="button" pButton style="font-weight: bold" (click)="giris()"
+                  label="Giriş Yap"></button>
+          <br><br>
+          <!--<p *ngIf="error" style="font-weight: bold; color: red"> Hatalı Kullanıcı Adı ve/veya Parola Girişi Yaptınız.</p>-->
+
+
+        </div>
+      </div>
     </div>
-    <br>
-    <button type="button" pButton style="font-weight: bold" (click)="giris()"
-            label="Giriş Yap"></button>
-    <!--[routerLink]="['/firma-bilgileri']-->
   </div>
 </div>
 <br>
+

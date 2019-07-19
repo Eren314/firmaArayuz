@@ -9,7 +9,7 @@ import {GlobalService} from '../global.service';
   selector: 'app-urun-hizmetler',
   templateUrl: './urun-hizmetler.component.html',
   styleUrls: ['./urun-hizmetler.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, GlobalService]
 })
 export class UrunHizmetlerComponent implements OnInit {
 
@@ -48,7 +48,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-urun-hizmetleri'
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID') + '/firma-urun-hizmetleri'
       )
 
       .subscribe(fys => {
@@ -84,7 +84,7 @@ export class UrunHizmetlerComponent implements OnInit {
 
     this.http
       .post(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/urun-hizmet', this.yetkili
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID') + '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

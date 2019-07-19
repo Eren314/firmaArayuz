@@ -38,6 +38,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AktivasyonComponent } from './aktivasyon/aktivasyon.component';
 import {PasswordModule} from 'primeng/password';
 import { BaslikComponent } from './baslik/baslik.component';
+import {AuthGuard} from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,7 @@ import { BaslikComponent } from './baslik/baslik.component';
     CalendarModule,
     PasswordModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

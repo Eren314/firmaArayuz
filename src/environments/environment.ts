@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  id: 6,
   version:  '1.0.0',
   zaman: '12.07.2019',
   mode: 'dev',

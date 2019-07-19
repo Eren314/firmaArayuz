@@ -48,7 +48,7 @@ export class ReferanslarComponent implements OnInit {
 
     this.http
       .get(
-        'http://localhost/rest/firma/proje' + this.gservice.id
+        'http://localhost/rest/firma/proje' + localStorage.getItem('ID')
       )
 
       .subscribe(fys => {
@@ -87,7 +87,7 @@ export class ReferanslarComponent implements OnInit {
 
     this.http
       .post(
-        'http://localhost/rest/firma/' + this.gservice.id + '/firma-yetkilisi', this.yetkili
+        'http://localhost/rest/firma/' + localStorage.getItem('ID') + '/firma-yetkilisi', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

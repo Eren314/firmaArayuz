@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  id: number = 6;
+  id: number;
 
   constructor() { }
 }

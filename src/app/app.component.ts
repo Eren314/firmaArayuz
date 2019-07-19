@@ -11,6 +11,7 @@ import {GlobalService} from './global.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  providers: [GlobalService],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements  OnInit {
@@ -29,6 +30,7 @@ export class AppComponent implements  OnInit {
     this.version = environment.version;
     this.zaman = environment.zaman;
     this.mode = environment.mode;
+    localStorage.setItem('AUTH', 'no');
 
   }
 
@@ -54,7 +56,7 @@ export class AppComponent implements  OnInit {
 
       this.http
     .get(
-         environment.apiUrl + '/rest/firma/' + this.gservice.id
+         environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID')
     )
 
     .subscribe(posts => {
@@ -72,7 +74,7 @@ export class AppComponent implements  OnInit {
   }
 
   storedv(){
-    return this.gservice.id;
+    return localStorage.getItem('ID');
   }
 
 

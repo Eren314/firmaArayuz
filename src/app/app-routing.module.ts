@@ -9,16 +9,18 @@ import {ReferanslarComponent} from './referanslar/referanslar.component';
 import {DokumanlarComponent} from './dokumanlar/dokumanlar.component';
 import {AuthComponent} from './auth/auth.component';
 import {AktivasyonComponent} from './aktivasyon/aktivasyon.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/giris', pathMatch: 'full'},
-  {path: 'firma-bilgileri', component: FirmaBilgileriComponent},
-  {path: 'yetkili-kisiler', component: YetkiliKisilerComponent},
-  {path: 'urun-hizmetler', component: UrunHizmetlerComponent},
-  {path: 'projeler', component: ProjelerComponent},
-  {path: 'turksat-projeleri', component: TurksatProjelerComponent},
-  {path: 'referanslar', component: ReferanslarComponent},
-  {path: 'dokumanlar', component: DokumanlarComponent},
+  {path: 'firma-bilgileri', component: FirmaBilgileriComponent, canActivate: [AuthGuard]},
+  {path: 'yetkili-kisiler', component: YetkiliKisilerComponent, canActivate: [AuthGuard]},
+  {path: 'urun-hizmetler', component: UrunHizmetlerComponent, canActivate: [AuthGuard]},
+  {path: 'projeler', component: ProjelerComponent, canActivate: [AuthGuard]},
+  {path: 'turksat-projeleri', component: TurksatProjelerComponent, canActivate: [AuthGuard]},
+  {path: 'referanslar', component: ReferanslarComponent, canActivate: [AuthGuard]},
+  {path: 'dokumanlar', component: DokumanlarComponent, canActivate: [AuthGuard]},
+  /*, canActivate: [AuthGuard]*/
   {path: 'giris', component: AuthComponent},
   {path: 'aktivasyon', component: AktivasyonComponent},
   {path: '**', redirectTo: '/giris'}

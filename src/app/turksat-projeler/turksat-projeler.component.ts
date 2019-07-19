@@ -54,7 +54,7 @@ export class TurksatProjelerComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/alt-yukleniciler'
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID') + '/alt-yukleniciler'
       )
 
       .subscribe(fys => {
@@ -88,7 +88,7 @@ export class TurksatProjelerComponent implements OnInit {
 
     this.http
       .post(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id+ '/urun-hizmet', this.yetkili
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID')+ '/urun-hizmet', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

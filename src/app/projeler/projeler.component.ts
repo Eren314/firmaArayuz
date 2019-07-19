@@ -62,7 +62,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-projeleri'
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID') + '/firma-projeleri'
       )
 
       .subscribe(fys => {
@@ -105,7 +105,7 @@ export class ProjelerComponent implements OnInit {
 
     this.http
       .post(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id + '/firma-proje', this.yetkili
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID') + '/firma-proje', this.yetkili
       )
       .subscribe(response => {
         console.log(response);

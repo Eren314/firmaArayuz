@@ -49,7 +49,7 @@ export class FirmaBilgileriComponent implements OnInit {
   firmaNitelikleri: any[];
   navs: MenuItem[];
 
-  constructor(private http: HttpClient, private messageService: MessageService, private router: Router, public gservice: GlobalService) {
+  constructor(private http: HttpClient, private messageService: MessageService, private router: Router, private gservice: GlobalService) {
 
     this.http
       .get(
@@ -133,7 +133,7 @@ export class FirmaBilgileriComponent implements OnInit {
 
     this.http
       .get(
-        environment.apiUrl + '/rest/firma/' + this.gservice.id
+        environment.apiUrl + '/rest/firma/' + localStorage.getItem('ID')
       )
 
       .subscribe(posts => {
