@@ -30,7 +30,6 @@ export class AppComponent implements  OnInit {
     this.version = environment.version;
     this.zaman = environment.zaman;
     this.mode = environment.mode;
-    localStorage.setItem('AUTH', 'no');
 
   }
 

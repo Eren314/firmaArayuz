@@ -11,7 +11,7 @@ import {GlobalService} from '../global.service';
 })
 export class ReferanslarComponent implements OnInit {
 
-  title = 'firmaArayuz';
+  title = 'ProjeM-Firma';
   loadedPosts: any;
   adi: string;
   adres: string;

@@ -23,7 +23,7 @@ const routes: Routes = [
   /*, canActivate: [AuthGuard]*/
   {path: 'giris', component: AuthComponent},
   {path: 'aktivasyon', component: AktivasyonComponent},
-  {path: '**', redirectTo: '/giris'}
+  {path: '**', redirectTo: '/firma-bilgileri'}
 
   ];
 

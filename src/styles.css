@@ -2193,7 +2193,7 @@ body .ui-picklist .ui-picklist-filter-container input.ui-picklist-filter {
   padding-right: 2em;
   text-indent: 0;
 }
-body .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon {
+  body .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon {
   top: 50%;
   margin-top: -0.5em;
   left: auto;

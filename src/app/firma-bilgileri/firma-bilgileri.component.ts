@@ -16,7 +16,7 @@ import {GlobalService} from '../global.service';
 })
 export class FirmaBilgileriComponent implements OnInit {
 
-  title = 'firmaArayuz';
+  title = 'ProjeM-Firma';
   loadedPosts: any = {};
   adi: string;
   adres: string;
@@ -48,6 +48,7 @@ export class FirmaBilgileriComponent implements OnInit {
   firmaN: any;
   firmaNitelikleri: any[];
   navs: MenuItem[];
+  auth: any;
 
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router, private gservice: GlobalService) {
 
@@ -114,6 +115,7 @@ export class FirmaBilgileriComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth =localStorage.getItem('AUTH');
 
     this.navs = [
       {label: 'Firma Bilgileri',  routerLink: ['firma-bilgileri']},

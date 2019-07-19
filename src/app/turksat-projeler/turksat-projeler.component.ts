@@ -14,7 +14,7 @@ import {GlobalService} from '../global.service';
 export class TurksatProjelerComponent implements OnInit {
 
   ti
-  title = 'firmaArayuz';
+  title = 'ProjeM-Firma';
   loadedPosts: any;
   adi: string;
   adres: string;

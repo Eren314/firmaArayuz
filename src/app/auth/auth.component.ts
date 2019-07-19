@@ -21,6 +21,7 @@ export class AuthComponent implements OnInit {
   error: any;
 
   constructor(private http: HttpClient, public router: Router, public gservice: GlobalService, private messageService: MessageService) {
+    localStorage.setItem('AUTH', 'no');
   }
 
   ngOnInit() {
@@ -40,6 +41,10 @@ export class AuthComponent implements OnInit {
         localStorage.setItem('ADSOYAD', this.resp.adSoyad);
         localStorage.setItem('AUTH', 'yes');
 
+      },error => {
+        this.error = error.error;
+        this.eposta = '';
+        this.sifre = '';
       });
 
 
