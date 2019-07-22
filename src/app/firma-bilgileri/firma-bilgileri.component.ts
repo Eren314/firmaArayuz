@@ -115,10 +115,10 @@ export class FirmaBilgileriComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth =localStorage.getItem('AUTH');
+    this.auth = localStorage.getItem('AUTH');
 
     this.navs = [
-      {label: 'Firma Bilgileri',  routerLink: ['firma-bilgileri']},
+      {label: 'Firma Bilgileri', routerLink: ['firma-bilgileri']},
       {label: 'Yetkili Kişiler', routerLink: ['yetkili-kisiler']},
       {label: 'Ürün ve Hizmetler', routerLink: ['urun-hizmetler']},
       {label: 'Projeler', routerLink: ['projeler']},
@@ -167,7 +167,7 @@ export class FirmaBilgileriComponent implements OnInit {
   }
 
 
-   saveThis() {
+  saveThis() {
 
 
     this.http

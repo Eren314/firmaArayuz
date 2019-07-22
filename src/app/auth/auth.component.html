@@ -20,8 +20,9 @@
           <button type="button" pButton style="font-weight: bold" (click)="giris()"
                   label="Giriş Yap"></button>
           <br><br>
-          <p *ngIf="error" style="font-weight: bold; color: red"> Hatalı Kullanıcı Adı ve/veya Parola Girişi Yaptınız.</p>
-
+          <p-captcha siteKey="6Lee9KoUAAAAADCfau1C7qW8WPcMuUhBbnJP8Qq9" (onResponse)="showResponse($event)"></p-captcha>
+          <p *ngIf="error" style="font-weight: bold; color: red"> Hatalı Kullanıcı Adı ve/veya Parola Girişi
+            Yaptınız.</p>
 
         </div>
       </div>
@@ -29,4 +30,6 @@
   </div>
 </div>
 <br>
+
+
 

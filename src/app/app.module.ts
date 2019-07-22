@@ -39,6 +39,9 @@ import { AktivasyonComponent } from './aktivasyon/aktivasyon.component';
 import {PasswordModule} from 'primeng/password';
 import { BaslikComponent } from './baslik/baslik.component';
 import {AuthGuard} from './auth.guard';
+import {CaptchaModule} from 'primeng/captcha';
+import { RecaptchaModule } from 'ng-recaptcha';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +83,9 @@ import {AuthGuard} from './auth.guard';
     ConfirmDialogModule,
     ToggleButtonModule,
     CalendarModule,
-    PasswordModule
+    PasswordModule,
+    CaptchaModule,
+    RecaptchaModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

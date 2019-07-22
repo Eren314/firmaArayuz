@@ -1892,7 +1892,8 @@ body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover .ui-sortable-c
   color: #333333;
 }
 body .ui-table .ui-sortable-column.ui-state-highlight {
-  background-color: #3F51B5;
+  /*background-color: #3F51B5;*/
+  background-color: #E91E63;
   color: #ffffff;
 }
 body .ui-table .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {

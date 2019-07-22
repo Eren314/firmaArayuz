@@ -47,7 +47,8 @@ export class AppComponent implements  OnInit {
     ];
 
 
-    this.fetchPosts();
+    if (localStorage.getItem('ID')){
+    this.fetchPosts();}
   }
 
   private fetchPosts() {
