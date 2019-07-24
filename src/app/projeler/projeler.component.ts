@@ -31,6 +31,7 @@ export class ProjelerComponent implements OnInit {
   loading: boolean;
   table: any;
   first: any;
+  tr: any;
 
 
   constructor(private http: HttpClient, private messageService: MessageService, public gservice: GlobalService) {
@@ -53,6 +54,17 @@ export class ProjelerComponent implements OnInit {
           this.kurumlar = resp;
         }
       );
+
+    this.tr = {
+      firstDayOfWeek: 1,
+      dayNames: [  'Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi' ],
+      dayNamesShort: [  'Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct' ],
+      dayNamesMin: [  'Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct' ],
+      monthNames: [ 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
+      monthNamesShort: [ 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
+      today: 'Bugün',
+      clear: 'Temizle'
+    };
 
   }
 
@@ -135,7 +147,7 @@ export class ProjelerComponent implements OnInit {
 
     setTimeout(() => {
       this.fetchFY();
-    }, 400);
+    }, 700);
 
 
   }

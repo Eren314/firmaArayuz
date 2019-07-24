@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MenuItem, MessageService} from 'primeng/api';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -19,7 +20,10 @@ export class AuthComponent implements OnInit {
   firmaId: any;
   adSoyad: any;
   error: any;
+  enableGiris = true;
   res = '6Lee9KoUAAAAADCfau1C7qW8WPcMuUhBbnJP8Qq9';
+
+
 
   constructor(private http: HttpClient, public router: Router, public gservice: GlobalService, private messageService: MessageService) {
     localStorage.setItem('AUTH', 'no');
@@ -59,16 +63,18 @@ export class AuthComponent implements OnInit {
     // call to a backend to verify against recaptcha with private key
 
 
-    this.res = grecaptcha.getResponse();
+    /*this.res = grecaptcha.getResponse();
 
 
     this.http
       .post(
-        ' https://www.google.com/recaptcha/api/siteverify?secret=' + '6Lee9KoUAAAAAOnK92kQnziYdDFHk8qlBl6BdNxD' + '&response=' + this.res
+        ' https://www.google.com/recaptcha/api/siteverify?secret=' + '6Lee9KoUAAAAAOnK92kQnziYdDFHk8qlBl6BdNxD' + '&response=' + this.res, this.res
       )
       .subscribe(gre => {
         console.log(gre);
-      });
+      });*/
+
+    this.enableGiris = false;
 
   }
 

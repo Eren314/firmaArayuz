@@ -10,3 +10,10 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+/*
+let cors = require('cors');
+let express = require('express')
+let app = express();
+app.use(cors());
+*/

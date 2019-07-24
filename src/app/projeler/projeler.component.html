@@ -84,7 +84,7 @@
         </div>
         <div class="ui-g-8">
           <!--<input pInputText id="trh" [(ngModel)]="yetkili.firmaReferans.tarihi">-->
-          <p-calendar id="trh" dateFormat="dd.mm.yy" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
+          <p-calendar id="trh" [locale]="tr" dateFormat="dd.mm.yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2050" [(ngModel)]="firmaReferans.tarihi"></p-calendar>
         </div>
       </div>
       <div class="ui-g-12">

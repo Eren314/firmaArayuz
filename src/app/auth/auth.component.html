@@ -16,8 +16,8 @@
     <label for="sifre">Şifre</label>
     </span>
           </div>
-          <br><br>
-          <button type="button" pButton style="font-weight: bold" (click)="giris()"
+          <br>
+          <button type="button" pButton style="font-weight: bold" (click)="giris()" [disabled]="this.enableGiris"
                   label="Giriş Yap"></button>
           <br><br>
           <p-captcha siteKey="6Lee9KoUAAAAADCfau1C7qW8WPcMuUhBbnJP8Qq9" (onResponse)="showResponse($event)"></p-captcha>
